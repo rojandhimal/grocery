@@ -1,0 +1,63 @@
+# customer.graphql
+type Customer {
+  address: String
+  contactNumber: String
+  createdAt: String
+  createdBy: User
+  credit: Credit
+  gender: String
+  id: Int
+  name: String
+  profileUrl: String
+  updatedAt: String
+  updatedBy: User
+}
+
+type CustomerPayload {
+  customer: Customer
+  error: JSON
+  success: Boolean
+}
+
+input CreateCustomerInput {
+  address: String!
+  contactNumber: String!
+  gender: String
+  name: String!
+  profileUrl: String
+}
+
+input UpdateCustomerInput {
+  id: Int!
+  address: String
+  contactNumber: String
+  gender: String
+  name: String
+  profileUrl: String
+}
+
+input DeleteCustomerInput {
+  id: Int!
+}
+
+type Query {
+  customer(id: Int!): CustomerPayload
+  customers(input: CustomerFilterInput): CustomersPayload
+}
+
+type Mutation {
+  createCustomer(input: CreateCustomerInput!): CustomerPayload
+  updateCustomer(input: UpdateCustomerInput!): CustomerPayload
+  deleteCustomer(input: DeleteCustomerInput!): CustomerPayload
+}
+
+type CustomersPayload {
+  count: Int
+  edges: [Customer]
+  error: JSON
+}
+
+input CustomerFilterInput {
+  limit: Int
+  offset: Int
+}

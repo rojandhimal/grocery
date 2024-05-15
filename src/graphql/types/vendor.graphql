@@ -1,0 +1,69 @@
+# vendor.graphql
+type Vendor {
+  address: String
+  contactNumber: String
+  createdBy: User
+  createdAt: String
+  email: String
+  id: Int
+  isDeleted: Boolean
+  name: String
+  profileUrl: String
+  salesPersonContactNumber: String
+  salesPersonName: String
+  updatedAt: String
+  updatedBy: User
+}
+
+type VendorPayload {
+  vendor: Vendor
+  error: JSON
+  success: Boolean
+}
+
+input CreateVendorInput {
+  address: String!
+  contactNumber: String
+  name: String!
+  salesPersonName: String
+  salesPersonContactNumber: String
+  email: String
+  profileUrl: String
+}
+
+input UpdateVendorInput {
+  id: Int!
+  address: String
+  contactNumber: String
+  name: String
+  salesPersonName: String
+  salesPersonContactNumber: String
+  email: String
+  profileUrl: String
+}
+
+input DeleteVendorInput {
+  id: Int!
+}
+
+type Query {
+  vendor(id: Int!): VendorPayload
+  vendors(input: VendorFilterInput): VendorsPayload
+}
+
+type Mutation {
+  createVendor(input: CreateVendorInput!): VendorPayload
+  updateVendor(input: UpdateVendorInput!): VendorPayload
+  deleteVendor(input: DeleteVendorInput!): VendorPayload
+}
+
+type VendorsPayload {
+  count: Int
+  edges: [Vendor]
+  error: JSON
+}
+
+input VendorFilterInput {
+  limit: Int
+  offset: Int
+}

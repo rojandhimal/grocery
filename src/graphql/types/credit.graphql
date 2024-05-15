@@ -1,0 +1,53 @@
+# credit.graphql
+type Credit {
+  id: Int
+  createdAt: String
+  createdBy: User
+  creditHistory: [CreditLog]
+  totalAmount: Float
+  updatedBy: User
+  updatedAt: String
+}
+
+type CreditPayload {
+  credit: Credit
+  error: JSON
+  success: Boolean
+}
+
+input CreateCreditInput {
+  customerId: Int!
+  amount: Float
+}
+
+input UpdateCreditInput {
+  id: Int!
+  name: String
+  logo: String
+}
+
+input DeleteCreditInput {
+  id: Int!
+}
+
+type Query {
+  credit(customerId: Int!): CreditPayload
+  credits(input: CreditFilterInput): CreditsPayload
+}
+
+type Mutation {
+  createCredit(input: CreateCreditInput!): CreditPayload
+  updateCredit(input: UpdateCreditInput!): CreditPayload
+  clearCredit(input: DeleteCreditInput!): CreditPayload
+}
+
+type CreditsPayload {
+  count: Int
+  edges: [Credit]
+  error: JSON
+}
+
+input CreditFilterInput {
+  limit: Int
+  offset: Int
+}

@@ -1,0 +1,51 @@
+# brand.graphql
+type Brand {
+  id: Int
+  createdAt: String
+  logo: String
+  name: String
+  updatedAt: String
+}
+
+type BrandPayload {
+  brand: Brand
+  error: JSON
+  success: Boolean
+}
+
+input CreateBrandInput {
+  name: String!
+  logo: String
+}
+
+input UpdateBrandInput {
+  id: Int!
+  name: String
+  logo: String
+}
+
+input DeleteBrandInput {
+  id: Int!
+}
+
+type Query {
+  brand(id: Int!): BrandPayload
+  brands(input: BrandFilterInput): BrandsPayload
+}
+
+type Mutation {
+  createBrand(input: CreateBrandInput!): BrandPayload
+  updateBrand(input: UpdateBrandInput!): BrandPayload
+  deleteBrand(input: DeleteBrandInput!): BrandPayload
+}
+
+type BrandsPayload {
+  count: Int
+  edges: [Brand]
+  error: JSON
+}
+
+input BrandFilterInput {
+  limit: Int
+  offset: Int
+}

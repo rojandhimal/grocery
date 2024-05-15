@@ -1,0 +1,27 @@
+require("dotenv").config({});
+module.exports.envConfig = {
+  PORT: process.env.PORT,
+  JWT_SECRET_KEY: process.env.JWT_SECRET_KEY,
+  SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+  SENDER_EMAIL: process.env.SENDER_EMAIL,
+  NODE_ENV: process.env.NODE_ENV,
+  MYSQL_HOST: process.env.MYSQL_HOST,
+  MYSQL_USER: process.env.MYSQL_USER,
+  MYSQL_PASS: process.env.MYSQL_PASSWORD,
+  MYSQL_NAME: process.env.MYSQL_DATABASE,
+  DB_DIALECT: process.env.DB_DIALECT,
+  BUYERS_BASE_URL: process.env.BUYERS_BASE_URL,
+  ADMINS_BASE_URL_BASE_URL: process.env.ADMINS_BASE_URL,
+  CURRENCY_API_KEY: process.env.CURRENCY_API_KEY,
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+  S3_BUCKET_NAME: process.env.S3_BUCKET_NAME,
+  TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
+  TWILIO_SENDER_NUMBER: process.env.TWILIO_SENDER_NUMBER,
+
+  MAIL_HOST: process.env.MAIL_HOST,
+  MAIL_PORT: process.env.MAIL_PORT,
+  MAIL_USER: process.env.MAIL_USER,
+  MAIL_PASSWORD: process.env.MAIL_PASSWORD,
+};

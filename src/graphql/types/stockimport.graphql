@@ -1,0 +1,59 @@
+type StockImport {
+  billNumber: String
+  createdBy: User
+  payments: [VendorPayment]
+  remarks: String
+  stockItems: [Stock]
+  totalAmount: Float
+  updatedBy: User
+  vendor: Vendor
+}
+
+type StockImportPayload {
+  stockImport: StockImport
+  error: JSON
+  success: Boolean
+}
+
+input CreateStockImportInput {
+  billNumber: String
+  remarks: String
+  vendorId: Int!
+  totalAmount: Float!
+  stockItems: [CreateStockInput]!
+  payment: CreateVendorPaymentInput
+}
+
+input UpdateStockImportInput {
+  id: Int!
+  billNumber: String
+  remarks: String
+  vendorId: Int
+  totalAmount: Float
+}
+
+input DeleteStockImportInput {
+  id: Int!
+}
+
+type Query {
+  stockImport(id: Int!): StockImportPayload
+  stockImports(input: StockImportFilterInput): StockImportsPayload
+}
+
+type Mutation {
+  createStockImport(input: CreateStockImportInput!): StockImportPayload
+  updateStockImport(input: UpdateStockImportInput!): StockImportPayload
+  deleteStockImport(input: DeleteStockImportInput!): StockImportPayload
+}
+
+type StockImportsPayload {
+  count: Int
+  edges: [StockImport]
+  error: JSON
+}
+
+input StockImportFilterInput {
+  limit: Int
+  offset: Int
+}

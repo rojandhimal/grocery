@@ -1,0 +1,133 @@
+# user.graphql
+
+type User {
+  address: String
+  contactNumber: String
+  createdAt: String
+  dateOfBirth: String
+  email: String
+  gender: String
+  id: Int
+  isActive: Boolean
+  isVerified: Boolean
+  lastActive: String
+  name: String
+  password: String
+  profileUrl: String
+  requestPasswordChange: Boolean
+  resetToken: String
+  role: Role
+  tokenExpireAt: String
+  updatedAt: String
+  username: String
+  verificationToken: String
+}
+
+input DeleteUserInput {
+  id: Int!
+}
+
+type LoginResponse {
+  success: Boolean
+  token: String
+  user: User
+}
+
+type ResponsePayload {
+  success: Boolean
+  message: String
+  error: JSON
+  user: User
+}
+
+input CreateUserInput {
+  address: String
+  name: String
+  email: String!
+  password: String!
+  profileUrl: String
+  username: String
+  acceptTermsAndCondition: Boolean
+}
+
+input UpdateUserInput {
+  address: String
+  contactNumber: String
+  createdAt: String
+  dateOfBirth: String
+  email: String
+  gender: String
+  name: String
+  profileUrl: String
+  username: String
+}
+
+input ForgetPasswordInput {
+  email: String!
+}
+
+input RequestVerifyEmailInput {
+  email: String!
+}
+
+input ResetPasswordInput {
+  newPassword: String!
+  confirmNewPassword: String!
+  resetToken: String!
+}
+
+input ChangePasswordInput {
+  confirmNewPassword: String!
+  newPassword: String!
+  password: String!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
+}
+
+input VerifyUserInput {
+  token: String!
+}
+
+input VerifyContactNumberOtpInput {
+  otp: String!
+  contactNumber: String!
+  countryCode: String!
+}
+
+type Query {
+  user(id: Int): User
+  users(input: UserFilterInput): UsersPayload
+  verifyResetToken(resetToken: String): ResponsePayload
+}
+
+type Mutation {
+  createUser(input: CreateUserInput!): User
+  login(input: LoginUserInput!): LoginResponse
+  updateUser(input: UpdateUserInput!): ResponsePayload
+  verifyContactNumber(input: VerifyContactNumberOtpInput!): ResponsePayload
+  verifyEmail(input: VerifyUserInput!): ResponsePayload
+  deleteUser(input: DeleteUserInput!): ResponsePayload
+  forgetPassword(input: ForgetPasswordInput): ResponsePayload
+  resetPassword(input: ResetPasswordInput): ResponsePayload
+  changePassword(input: ChangePasswordInput): ResponsePayload
+  requestVerifyEmail(input: RequestVerifyEmailInput!): ResponsePayload
+}
+
+type UsersPayload {
+  count: Int
+  edges: [User]
+  activeUsers: Int
+  inactiveUsers: Int
+}
+
+input UserFilterInput {
+  email: String
+  limit: Int
+  offset: Int
+  roleId: Int
+  search: String
+  isActive: Boolean
+}

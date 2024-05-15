@@ -1,0 +1,69 @@
+# product.graphql
+type Product {
+  brand: Brand
+  createdAt: String
+  createdBy: User
+  description: String
+  name: String
+  id: Int
+  price: Float
+  status: String
+  stockUnit: Int
+  updatedAt: String
+  updateUser: User
+}
+
+type ProductPayload {
+  product: Product
+  error: JSON
+  success: Boolean
+}
+
+input CreateProductInput {
+  brandId: Int
+  categories: [Int]
+  description: String
+  images: [String]
+  name: String!
+  price: Float!
+  status: String
+  stockUnit: Int
+}
+
+input UpdateProductInput {
+  id: Int!
+  brandId: Int
+  categories: [Int]
+  description: String
+  images: [String]
+  name: String
+  price: Float
+  status: String
+  stockUnit: Int
+}
+
+input DeleteProductInput {
+  id: Int!
+}
+
+type Query {
+  product(id: Int!): ProductPayload
+  products(input: ProductFilterInput): ProductsPayload
+}
+
+type Mutation {
+  createProduct(input: CreateProductInput!): ProductPayload
+  updateProduct(input: UpdateProductInput!): ProductPayload
+  deleteProduct(input: DeleteProductInput!): ProductPayload
+}
+
+type ProductsPayload {
+  count: Int
+  edges: [Product]
+  error: JSON
+}
+
+input ProductFilterInput {
+  limit: Int
+  offset: Int
+}

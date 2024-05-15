@@ -1,0 +1,76 @@
+type VendorPayment {
+  accountHolderName: String
+  bankName: String
+  chequeNumber: String
+  chequeDate: String
+  chequeRecievedBy: String
+  createdBy: User
+  stockImport: StockImport
+  method: String
+  status: String
+  totalAmount: Float
+  transactionId: String
+  updatedBy: User
+  vendor: Vendor
+}
+
+type VendorPaymentPayload {
+  vendorPayment: VendorPayment
+  error: JSON
+  success: Boolean
+}
+
+input CreateVendorPaymentInput {
+  accountHolderName: String
+  bankName: String
+  chequeNumber: String
+  chequeDate: String
+  chequeRecievedBy: String
+  stockImportId: Int
+  method: String
+  status: String
+  totalAmount: Float
+  transactionId: String
+  vendorId: Int
+}
+
+input UpdateVendorPaymentInput {
+  id: Int!
+  accountHolderName: String
+  bankName: String
+  chequeNumber: String
+  chequeDate: String
+  chequeRecievedBy: String
+  stockImportId: Int
+  method: String
+  status: String
+  totalAmount: Float
+  transactionId: String
+  vendorId: Int
+}
+
+input DeleteVendorPaymentInput {
+  id: Int!
+}
+
+type Query {
+  vendorPayment(id: Int!): VendorPaymentPayload
+  vendorPayments(input: VendorPaymentFilterInput): VendorPaymentsPayload
+}
+
+type Mutation {
+  createVendorPayment(input: CreateVendorPaymentInput!): VendorPaymentPayload
+  updateVendorPayment(input: UpdateVendorPaymentInput!): VendorPaymentPayload
+  deleteVendorPayment(input: DeleteVendorPaymentInput!): VendorPaymentPayload
+}
+
+type VendorPaymentsPayload {
+  count: Int
+  edges: [VendorPayment]
+  error: JSON
+}
+
+input VendorPaymentFilterInput {
+  limit: Int
+  offset: Int
+}

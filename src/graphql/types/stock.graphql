@@ -1,0 +1,65 @@
+type Stock {
+  createdBy: User
+  costPrice: Float
+  expiryDate: String
+  stockImport: StockImport
+  mrp: Float
+  product: Product
+  quantity: Int
+  sellingPrice: Float
+  updatedby: User
+  vendor: Vendor
+}
+
+type StockPayload {
+  stock: Stock
+  error: JSON
+  success: Boolean
+}
+
+input CreateStockInput {
+  costPrice: Float!
+  expiryDate: String!
+  importId: Int
+  mrp: Float!
+  productId: Int!
+  quantity: Int!
+  sellingPrice: Float!
+  vendorId: Int
+}
+
+input UpdateStockInput {
+  id: Int!
+  costPrice: Float
+  expiryDate: String
+  mrp: Float
+  productId: Int
+  quantity: Int
+  sellingPrice: Float
+}
+
+input DeleteStockInput {
+  id: Int!
+}
+
+type Query {
+  stock(id: Int!): StockPayload
+  stocks(input: StockFilterInput): StocksPayload
+}
+
+type Mutation {
+  createStock(input: CreateStockInput!): StockPayload
+  updateStock(input: UpdateStockInput!): StockPayload
+  deleteStock(input: DeleteStockInput!): StockPayload
+}
+
+type StocksPayload {
+  count: Int
+  edges: [Stock]
+  error: JSON
+}
+
+input StockFilterInput {
+  limit: Int
+  offset: Int
+}

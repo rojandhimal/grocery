@@ -1,0 +1,5 @@
+type CreditLog {
+  id: Int
+  amount: Float
+  remarks: String
+}

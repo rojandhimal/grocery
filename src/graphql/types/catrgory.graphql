@@ -1,0 +1,48 @@
+# category.graphql
+type Category {
+  id: Int
+  createdAt: String
+  name: String
+  updatedAt: String
+}
+
+type CategoryPayload {
+  category: Category
+  error: JSON
+  success: Boolean
+}
+
+input CreateCategoryInput {
+  name: String!
+}
+
+input UpdateCategoryInput {
+  id: Int!
+  name: String
+}
+
+input DeleteCategoryInput {
+  id: Int!
+}
+
+type Query {
+  category(id: Int!): CategoryPayload
+  categories(input: CategoryFilterInput): CategoriesPayload
+}
+
+type Mutation {
+  createCategory(input: CreateCategoryInput!): CategoryPayload
+  updateCategory(input: UpdateCategoryInput!): CategoryPayload
+  deleteCategory(input: DeleteCategoryInput!): CategoryPayload
+}
+
+type CategoriesPayload {
+  count: Int
+  edges: [Category]
+  error: JSON
+}
+
+input CategoryFilterInput {
+  limit: Int
+  offset: Int
+}
